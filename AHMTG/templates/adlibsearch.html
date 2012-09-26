@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block container %}
+<h1>AdLib Search</h1>
+<h2>Preview van: {{search}}</h2>
+<p>Deze geeft {{count}} resultaten</p>
+
+<div class="row">
+    {% for obj in result %}
+    <div class="span5 well">
+        <h3>{{obj.title.0}}</h3>
+        <p>{% for maker in obj.maker %}
+            {{maker.creator.0}} &nbsp;
+        {% endfor %}</p>        
+        <img src="{{obj.picref}}"/>
+        <p>o Vervaardiger
+o standplaats
+o Beschrijving
+o Periode</p>        
+    </div>
+    {% endfor %}
+</div>
+{% endblock container %}

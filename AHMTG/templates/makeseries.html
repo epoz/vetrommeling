@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block container %}
+<h1>Serie Maken</h1>
+
+<div class="row">
+    <div class="span5">
+    <a href="/admin/AHMTG/vraag/"><h2>Vragen Bewerken</h2></a>
+    {% for v in vragen %}
+        <p> <input class="vraag" type="checkbox" name="vraag" rel="{{v.pk}}"> {{v.txt}}
+            <a href="/admin/AHMTG/vraag/{{v.pk}}/" class="pull-right">edit</a>
+        </p>
+    {% endfor %}
+    </div>
+
+    <div class="span5 well">
+    <h2>AdLib search</h2>
+    <form method="GET" action="/adlibpreview/">
+    <input type="text" class="span4" name="search" id="serieadlibsearch">
+    <input type="submit" class="btn" name="submit" value="Preview">
+    </form>
+    <div id="previewresult"></div>
+
+    <h3>Samples</h3>
+    <ul>
+     <li>OC=prentencollectie*</li>
+     <li>OC=beeldencollectie*</li>
+     <li>OC=edele*</li>
+     <li>OC=fotocollectie*</li>
+     <li>OC=glascollectie*</li>
+     <li>OC=keramiekcollectie*</li>
+     <li>OC=meubelcollectie*</li>
+     <li>OC=onedele*</li>
+     <li>OC=penningen*</li>
+     <li>OC=prentencollectie*</li>
+     <li>OC=schilderijencollectie*</li>
+     <li>OC=tekeningencollectie*</li>
+     <li>OC=textielcollectie'*</li>
+    </ul></div>
+</div>
+
+<div class="row">
+    <p>
+        Naam: <input type="text" id="serienaam" class="span5">
+        (een beschrijvend tekst die aan deelnemers getoond worden)
+    </p>
+    <a href="#" class="btn btn-large btn-primary" id="makeseriesdoen">Opslaan</a>
+</div>
+{% endblock container %}

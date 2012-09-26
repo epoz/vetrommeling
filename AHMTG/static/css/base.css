@@ -1,0 +1,8 @@
+body {
+	padding: 60px 30px;
+}
+footer { width: 100%; background-color: #f0fff0; margin-top: 150px; height: 45px; padding: 7px;  
+         text-align: center; font-style: italic; color: #888; border-top: 1px solid #ddd; 
+         position: fixed; bottom: 0; left: 0}
+.highlight { background-color: yellow; }
+.facetcount {font-size: 85%; color: #9a9a9a;}

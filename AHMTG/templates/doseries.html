@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block container %}
+<h3>{{serie.naam}}</h3>
+
+<div class="row">
+    <div class="span5 hero-unit">
+        <h3>{{obj.title.0}}</h3>
+        <img src="{{obj.picref}}">
+
+        {% if obj.maker %}
+        <p><em>door:</em> 
+        {% for m in obj.maker %}
+            {{m.creator.0}}
+        {% if not forloop.last %}&middot; {% endif %} 
+        {% endfor %}
+        </p>
+        {% endif %}
+
+        {% if obj.collection %}
+        <h4>{{obj.collection.0}}</h4>
+        {% endif %}
+
+        <a href="http://collectie.amsterdammuseum.nl/dispatcher.aspx?action=search&database=ChoiceCollect&search=priref={{obj.priref.0}}">Bekijken op Collectie Website - {{obj.priref.0}}</a>
+
+    </div>
+    <div class="span5">
+        <h2>{{vraag.txt}}</h2>
+        {% if vraag.opties.count %}
+            {% for optie in vraag.opties.all %}
+            <p style="margin: 0">
+                <input type="radio" class="optie" name="optie" value="{{optie.data}}">
+                 {{optie.optie}}
+                 {% if optie.vrij %}
+                 <input type="text" id="antwoord" class="span4">
+                 {% endif %}
+            </p>
+            {% endfor %}
+        {% else %}
+        <input type="text" id="antwoord" class="span4">
+        {% endif %}
+        <div class="span4">    
+            <a href="#" class="btn btn-primary pull-right" id="volgende">Volgende</a>
+        </div>
+
+        <div class="span4" style="margin-top: 30px">        
+            <div class="progress progress-striped active">
+                <div id="progressbar" class="bar" style="width: 0%;"></div>
+            </div>
+        </div></div>
+
+        <div class="span4">
+            <h3>Scoreboard</h3>
+            <p><em>Je heb {{antwoorden.count}} van {{serie.items.count}} in deze reeks gedaan. Ga door!</em></p>
+            <p>Aantal deelnemers: {{aantal_deelnemers}}</p>
+            <p>Aantal antwoorden: {{aantal_antwoorden}}</p>
+            <p>Gemiddeld aantale taken gedaan: {{gem_antwoorden}}</p>
+        </div>
+
+</div>
+
+
+{% endblock container %}
+
+{% block extra_js %}
+<script type="text/javascript">
+$('#antwoord').focus();
+var SERIEVRAAG_PK = '{{serievraag.pk}}';
+var OBJ_ID = '{{obj.priref.0}}';
+
+var current = 0;
+PROGRESSTIMER = setInterval(function() {
+    current = current + 5;
+    if(current >= 100) {
+        // clearInterval(PROGRESSTIMER);
+        // return;
+        document.location = '.';
+        current = -10;
+        $('#progressbar').fadeOut();
+        $('#volgende').fadeOut();
+    }
+    var currentpercent = current/100*100;
+    $('#progressbar').css('width', currentpercent+'%');    
+},1000);
+</script>
+{% endblock extra_js %}

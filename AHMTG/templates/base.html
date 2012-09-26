@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block pagetitle %}VetRommelingh{% endblock %}
+    </title>
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap-responsive.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css" />
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+{% block extra_head %}{% endblock %}
+</head>
+<body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+          </a>
+          <ul class="nav">
+            <li {% if pagename == 'home' %} class="active"{% endif %}>
+              <a href="/">Home</a>
+            </li>            
+            {% if user.is_staff %}
+            <li>
+              <a href="/admin/">Admin</a>
+            </li>
+            <li{% if pagename == 'makeseries' %} class="active"{% endif %}>
+                <a href="/makeseries/">Serie Maken</a>
+            </li>
+            {% endif %}
+
+            <li{% if pagename == 'help' %} class="active"{% endif %}><a href="/help/about">Help</a></li>
+          </ul>
+
+          <div class="nav-collapse pull-right">
+            <ul class="nav">
+              {% if user.is_anonymous %}
+              <li><a href="/logout/">Login</a></li>  
+              {% else %}
+              <li><a href="/logout/">Uitloggen</a></li>
+              {% endif %}
+              
+              <li><a href="/help/contact">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+{% block container %}{% endblock container %}
+
+      <footer>
+        <img src="http://am.adlibhosting.com/images/footer.jpg">
+      </footer>
+
+    </div> <!-- /container -->
+
+    <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/jquery-1.7.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/bootstrap.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-django-csrf.js"></script>
+    {% block extra_js %}{% endblock extra_js %}    
+    <script type="text/javascript" src="{{ STATIC_URL }}js/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block container %}
+
+{% if msg %}
+<div class="alert alert-error">{{msg|safe}}</div>    
+{% endif %}
+
+<div class="row">
+    <h1>Login</h1>
+
+    <form action="." method="post" id="login-form">
+        <div style='display:none'>
+        {% csrf_token %}
+        </div>
+        
+        <div>
+            <input id="id_username" type="text" name="username" maxlength="30" placeholder="Email" {% if username %}value="{{username}}"{% endif %}/>
+            <input type="password" name="password" id="id_password" placeholder="Wachtwoord" 
+            {% if password %}value="{{password}}"{% endif %}/>
+            <input type="hidden" name="this_is_the_login_form" value="1" />
+            <input type="hidden" name="next" value="/" />
+        </div>
+
+        <div>        
+            <input type="submit" value="Inloggen" name="submit" class="btn"/> &middot; Help! Ik ben mijn wachtwoord kwijt.
+        </div>
+    </form>
+
+    <div class="well span4 pull-right">
+        <h1>Nog geen gebruiker?</h1>
+        <p>Dan kan je ook <a href="/register/">registreren</a></p>
+    </div>
+
+</div>
+
+{% endblock container %}
