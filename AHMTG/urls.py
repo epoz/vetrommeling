@@ -8,6 +8,7 @@ urlpatterns = patterns('',
     url(r'^$', 'AHMTG.views.home', name='home'),    
     url(r'^adlibpreview/$', 'AHMTG.views.adlibpreview', name='adlibpreview'),
     url(r'^makeseries/$', 'AHMTG.views.makeseries', name='makeseries'),
+    url(r'^makepybossa/$', 'AHMTG.views.makepybossa', name='makepybossa'),
     url(r'^doseries/(\d+)/$', 'AHMTG.views.doseries', name='makeseries'),
     url(r'^answer/$', 'AHMTG.views.save_answer', name='answer'),
 

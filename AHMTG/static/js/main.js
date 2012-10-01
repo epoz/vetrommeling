@@ -14,6 +14,21 @@
     });
   });
 
+  $('#makeseriespybossa').click(function(event) {
+    var loc, v, _i, _len, _ref;
+    event.preventDefault();
+    loc = 'naam=' + encodeURI($('#serienaam').val());
+    loc += '&adlibsearch=' + encodeURI($('#serieadlibsearch').val());
+    _ref = $('.vraag:checked');
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      v = _ref[_i];
+      loc += '&vraag=' + $(v).attr('rel');
+    }
+    return $.post('/makepybossa/', loc, function(data) {
+      return alert(data);
+    });
+  });
+
   $('#volgende').click(function(event) {
     var antw;
     event.preventDefault();

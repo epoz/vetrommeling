@@ -27,6 +27,8 @@ class EmailOrUsernameModelBackend(object):
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
     school = models.ForeignKey('School', related_name='users', blank=True, null=True)
+    pybossa_server = models.CharField(max_length=250, blank=True, null=True)
+    pybossa_api_key = models.CharField(max_length=250, blank=True, null=True)
 
 def create_user_profile(sender, instance, created, **kwargs):
     if created:

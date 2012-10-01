@@ -44,14 +44,18 @@ def registermethod(request):
                 })
         except models.User.DoesNotExist:
             u, created = models.User.objects.get_or_create(username=kusername, 
-                                                      password=password, 
                                                       email=username)
+            u.set_password(password)
+            u.save()
         school = request.POST.get('school')
         if school:
             school = models.School.objects.get(pk=school)        
             u_profile = u.get_profile()
             u_profile.school = school
             u_profile.save()
+
+        user = authenticate(username=kusername, password=password)
+        login(request, user)
         return HttpResponseRedirect('/')
     return direct_to_template(request, 'register.html', 
                 {'schools': models.School.objects.all()})
@@ -156,3 +160,12 @@ def makeseries(request):
                               {'vragen': models.Vraag.objects.all(),
                                'pagename': 'makeseries'
                               })
+
+@login_required
+def makepybossa(request):
+    # Create a new application if it does not exist
+
+    # Make a new template, and update application
+
+    # Create a new task for each priref object
+    return HttpResponse('OK', mimetype='text/plain')
