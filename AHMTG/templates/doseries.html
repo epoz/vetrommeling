@@ -1,9 +1,8 @@
 {% extends 'base.html' %}
 {% block container %}
-<h3>{{serie.naam}}</h3>
+<h1>{{serie.naam}}</h1>
 
-<div class="row">
-    <div class="span5 hero-unit">
+    <div class="blokLeft" id="viewer">
         <h3>{{obj.title.0}}</h3>
         <img src="{{obj.picref}}">
 
@@ -23,40 +22,32 @@
         <a href="http://collectie.amsterdammuseum.nl/dispatcher.aspx?action=search&database=ChoiceCollect&search=priref={{obj.priref.0}}">Bekijken op Collectie Website - {{obj.priref.0}}</a>
 
     </div>
-    <div class="span5">
+    <div class="blokRight">
         <h2>{{vraag.txt}}</h2>
         {% if vraag.opties.count %}
             {% for optie in vraag.opties.all %}
-            <p style="margin: 0">
                 <input type="radio" class="optie" name="optie" value="{{optie.data}}">
                  {{optie.optie}}
                  {% if optie.vrij %}
                  <input type="text" id="antwoord" class="span4">
                  {% endif %}
-            </p>
             {% endfor %}
         {% else %}
         <input type="text" id="antwoord" class="span4">
-        {% endif %}
-        <div class="span4">    
+        {% endif %}  
             <a href="#" class="btn btn-primary pull-right" id="volgende">Volgende</a>
-        </div>
 
-        <div class="span4" style="margin-top: 30px">        
+      
             <div class="progress progress-striped active">
                 <div id="progressbar" class="bar" style="width: 0%;"></div>
             </div>
-        </div></div>
-
-        <div class="span4">
             <h3>Scoreboard</h3>
             <p><em>Je heb {{antwoorden.count}} van {{serie.items.count}} in deze reeks gedaan. Ga door!</em></p>
             <p>Aantal deelnemers: {{aantal_deelnemers}}</p>
             <p>Aantal antwoorden: {{aantal_antwoorden}}</p>
             <p>Gemiddeld aantale taken gedaan: {{gem_antwoorden}}</p>
-        </div>
 
-</div>
+	</div>
 
 
 {% endblock container %}

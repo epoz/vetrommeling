@@ -6,9 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block pagetitle %}VetRommelingh{% endblock %}
     </title>
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css" />
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap-responsive.css" />
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/AHMTG.css" />
 
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -17,29 +15,18 @@
 </head>
 <body>
 
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-          </a>
+    <header>
+		<nav id="siteMenuLeft">
           <ul class="nav">
-            <li {% if pagename == 'home' %} class="active"{% endif %}>
-              <a href="/">Home</a>
-            </li>            
+            <li {% if pagename == 'home' %} class="active"{% endif %}><a href="/">Home</a></li>            
             {% if user.is_staff %}
-            <li>
-              <a href="/admin/">Admin</a>
-            </li>
-            <li{% if pagename == 'makeseries' %} class="active"{% endif %}>
-                <a href="/makeseries/">Serie Maken</a>
-            </li>
+            <li><a href="/admin/">Admin</a></li>
+            <li{% if pagename == 'makeseries' %} class="active"{% endif %}><a href="/makeseries/">Serie Maken</a></li>
             {% endif %}
-
             <li{% if pagename == 'help' %} class="active"{% endif %}><a href="/help/about">Help</a></li>
           </ul>
-
-          <div class="nav-collapse pull-right">
+        </nav>
+		<nav id="siteMenuRight">
             <ul class="nav">
               {% if user.is_anonymous %}
               <li><a href="/logout/">Login</a></li>  
@@ -49,25 +36,27 @@
               
               <li><a href="/help/contact">Contact</a></li>
             </ul>
-          </div>
-        </div>
-      </div>
-    </div>
+        </nav>
+    </header>
 
     <div class="container">
 
 {% block container %}{% endblock container %}
-
+	<hr />
+    </div> <!-- /container -->
       <footer>
-        <img src="http://am.adlibhosting.com/images/footer.jpg">
+        <img src="/static/img/footer_tagginggame.png" alt="footer" border="0" usemap="#Map" />
+<map name="Map" id="Map"><area shape="rect" coords="140,0,432,120" href="http://www.amsterdammuseum.nl/" alt="Amsterdam museum" target="_parent" /><area shape="rect" coords="450,1,587,123" href="http://www.doen.nl/" target="_parent" alt="Stichting Doen" />
+<area shape="rect" coords="621,-2,734,119" href="http://www.movisie.nl/" target="_parent" alt="movisie" />
+<area shape="rect" coords="759,0,892,119" href="http://www.erfgoednederland.nl/" alt="erfgoed Nederland" target="_parent" /></map>
       </footer>
 
-    </div> <!-- /container -->
+
 
     <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/jquery-1.7.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/bootstrap.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-django-csrf.js"></script>
     {% block extra_js %}{% endblock extra_js %}    
-    <script type="text/javascript" src="{{ STATIC_URL }}js/main.8d7a286fa213bcfb1e6324b7ba8beb05.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/main.js"></script>
   </body>
 </html>
