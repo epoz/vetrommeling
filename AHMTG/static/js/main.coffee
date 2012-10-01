@@ -19,9 +19,6 @@ $('#volgende').click (event) ->
     antw = $('input[name="optie"]:checked').val()
     if !antw 
         antw = $('#antwoord').val()
-    if !antw
-        document.location = '.'
-        return
     $.post( '/answer/', {
         'serievraag_pk' : SERIEVRAAG_PK,
         'obj_id' : OBJ_ID,
