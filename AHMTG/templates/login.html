@@ -15,9 +15,15 @@
         </div>
         
         <div>
+        	<label>
+            	<span>E-mail</span>
             <input id="id_username" type="text" name="username" maxlength="30" placeholder="Email" {% if username %}value="{{username}}"{% endif %}/>
+            </label>
+            <label>
+            	<span>Wachtwoord</span>
             <input type="password" name="password" id="id_password" placeholder="Wachtwoord" 
             {% if password %}value="{{password}}"{% endif %}/>
+            </label>
             <input type="hidden" name="this_is_the_login_form" value="1" />
             <input type="hidden" name="next" value="/" />
         </div>
