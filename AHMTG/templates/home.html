@@ -5,10 +5,11 @@
     <div class="offset1 span9 hero-unit">
         <h1>Culturele Crowdsourcing Game</h1>
         <h3>Kies een serie om te spelen:</h3>
+        <ul>
         {% for s in series %}
-        <p><a href="/doseries/{{s.pk}}/">{{s.naam}}</a></p>
+        <li><a href="/doseries/{{s.pk}}/">{{s.naam}}</a></li>
         {% endfor %}
-        
+        </ul>
     </div>
 </div>
 
