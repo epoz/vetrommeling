@@ -2,8 +2,8 @@
 {% block container %}
 <h1>Serie Maken</h1>
 
-<div class="row">
-    <div class="span5">
+
+    <div class="blokLeft">
     <a href="/admin/AHMTG/vraag/"><h2>Vragen Bewerken</h2></a>
     {% for v in vragen %}
         <p> <input class="vraag" type="checkbox" name="vraag" rel="{{v.pk}}"> {{v.txt}}
@@ -12,7 +12,7 @@
     {% endfor %}
     </div>
 
-    <div class="span5 well">
+    <div class="blokRight">
     <h2>AdLib search</h2>
     <form method="GET" action="/adlibpreview/">
     <input type="text" class="span4" name="search" id="serieadlibsearch">
@@ -36,14 +36,12 @@
      <li>OC=tekeningencollectie*</li>
      <li>OC=textielcollectie'*</li>
     </ul></div>
-</div>
 
-<div class="row">
+
     <p>
         Naam: <input type="text" id="serienaam" class="span5">
         (een beschrijvend tekst die aan deelnemers getoond worden)
     </p>
     <a href="#" class="btn btn-large btn-primary" id="makeseriesdoen">Opslaan</a>
     <a href="#" class="btn btn-large btn-primary" id="makeseriespybossa">PyBossa App maken</a>
-</div>
 {% endblock container %}
