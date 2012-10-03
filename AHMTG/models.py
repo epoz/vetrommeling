@@ -30,6 +30,12 @@ class UserProfile(models.Model):
     pybossa_server = models.CharField(max_length=250, blank=True, null=True)
     pybossa_api_key = models.CharField(max_length=250, blank=True, null=True)
 
+    def is_docent(self):
+        for g in self.user.groups.all():
+            if g.name == 'Docent':
+                return True 
+        return False
+
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         UserProfile.objects.create(user=instance)

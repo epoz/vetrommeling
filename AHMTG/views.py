@@ -17,7 +17,7 @@ def home(request):
 
     return render(request, 'home.html', 
                               {'pagename': 'home',
-                               'series': models.Serie.objects.all(), 
+                               'series': models.Serie.objects.all()
                               })
 
 def registerloginmethod_helper(request, template, username=u'', password=u'', msg=None):
