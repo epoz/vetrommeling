@@ -115,8 +115,8 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'AHMTG',  # AMake sure it is listed BEFORE admin, as we want to override the templates
     'django.contrib.admin',
-    'AHMTG',
 )
 
 AUTHENTICATION_BACKENDS = (

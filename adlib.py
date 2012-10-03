@@ -92,3 +92,18 @@ class Server(object):
                   'limit': '100',
                 }
         return self
+
+    def updaterecord(self, database, data):
+        if 'priref' not in data:
+            raise Exception('A priref in data is required')
+        params = {'database': database, 'output':json }
+        adlibxml = '<adlibXML><recordList><record><priref>%s</priref>' % data['priref']
+        for k,v in data.items():
+            if k == 'priref':
+                continue
+            adlibxml += '<%s>%s</%s>' % (k.encode('utf8'),v.encode('utf8'),k.encode('utf8'))
+        adlibxml += '</record></recordList></adlibXML>'
+        params['data'] = adlibxml
+        req = urllib2.Request(self.address, urllib.urlencode(params))
+        response = urllib2.urlopen(req)
+        return response.read()
