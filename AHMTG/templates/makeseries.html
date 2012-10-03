@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
 {% block container %}
 <h1>Serie Maken</h1>
-
+    <p>
+        Naam: <input type="text" id="serienaam" class="span5">
+        (een beschrijvend tekst die aan deelnemers getoond worden)
+    </p>
 
     <div class="blokLeft">
     <a href="/admin/AHMTG/vraag/"><h2>Vragen Bewerken</h2></a>
@@ -37,11 +40,6 @@
      <li>OC=textielcollectie'*</li>
     </ul></div>
 
-
-    <p>
-        Naam: <input type="text" id="serienaam" class="span5">
-        (een beschrijvend tekst die aan deelnemers getoond worden)
-    </p>
     <a href="#" class="btn btn-large btn-primary" id="makeseriesdoen">Opslaan</a>
     <a href="#" class="btn btn-large btn-primary" id="makeseriespybossa">PyBossa App maken</a>
 {% endblock container %}
