@@ -30,8 +30,11 @@ class SerieAdmin(admin.ModelAdmin):
     inlines = [SerieVraagInline, SerieItemInline]
 admin.site.register(Serie, SerieAdmin)
 
+class UserProfileSchoolInline(admin.TabularInline):
+    model = UserProfile
+
 class SchoolAdmin(admin.ModelAdmin):
-    pass
+    inlines = [UserProfileSchoolInline]
 admin.site.register(School, SchoolAdmin)
 
 class UserProfileInline(admin.StackedInline):
