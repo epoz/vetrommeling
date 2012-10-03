@@ -7,6 +7,7 @@
     <title>{% block pagetitle %}VetRommelingh{% endblock %}
     </title>
     <link rel="stylesheet" href="{{ STATIC_URL }}css/AHMTG.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/font-awesome.css" />
 
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -18,23 +19,23 @@
     <header>
 		<nav id="siteMenuLeft">
           <ul class="nav">
-            <li {% if pagename == 'home' %} class="active"{% endif %}><a href="/">Home</a></li>            
+            <li {% if pagename == 'home' %} class="active"{% endif %}><a href="/"><i class="icon-home"></i>Home</a></li>            
             {% if user.is_staff %}
-            <li><a href="/admin/">Admin</a></li>
-            <li{% if pagename == 'makeseries' %} class="active"{% endif %}><a href="/makeseries/">Serie Maken</a></li>
+            <li><a href="/admin/"><i class="icon-edit"></i>Admin</a></li>
+            <li{% if pagename == 'makeseries' %} class="active"{% endif %}><a href="/makeseries/"><i class="icon-tasks"></i>Serie Maken</a></li>
             {% endif %}
-            <li{% if pagename == 'help' %} class="active"{% endif %}><a href="/help/about">Help</a></li>
+            <li{% if pagename == 'help' %} class="active"{% endif %}><a href="/help/about"><i class="icon-question-sign"></i>Help</a></li>
           </ul>
         </nav>
 		<nav id="siteMenuRight">
             <ul class="nav">
               {% if user.is_anonymous %}
-              <li><a href="/logout/">Login</a></li>  
+              <li><a href="/logout/"><i class="icon-signin"></i>Login</a></li>  
               {% else %}
-              <li><a href="/logout/">Uitloggen</a></li>
+              <li><a href="/logout/"><i class="icon-signout"></i>Uitloggen</a></li>
               {% endif %}
               
-              <li><a href="/help/contact">Contact</a></li>
+              <li><a href="/help/contact"><i class="icon-envelope-alt"></i>Contact</a></li>
             </ul>
         </nav>
     </header>
