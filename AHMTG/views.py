@@ -9,6 +9,9 @@ import adlib
 import models
 import util
 
+def help(request, pagename='about'):
+    return render(request, 'help/%s.html'%pagename, {'pagename': pagename})    
+
 def home(request):
     if request.user.is_anonymous():
         return render(request, 'index.html', 
