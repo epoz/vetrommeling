@@ -131,7 +131,7 @@ def doseries(request, serie_pk):
 def save_answer(request):
     serievraag_pk = request.POST.get('serievraag_pk')
     obj_id = request.POST.get('obj_id')
-    data = request.POST.get('data')
+    data = request.POST.get('data', u'')
     a = models.Antwoord.objects.create(serievraag_id=int(serievraag_pk),
                                    user=request.user,
                                    obj=obj_id,
