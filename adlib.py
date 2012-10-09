@@ -96,7 +96,7 @@ class Server(object):
     def updaterecord(self, database, data):
         if 'priref' not in data:
             raise Exception('A priref in data is required')
-        params = {'database': database, 'output':json }
+        params = {'database': database, 'output':'json' }
         adlibxml = '<adlibXML><recordList><record><priref>%s</priref>' % data['priref']
         for k,v in data.items():
             if k == 'priref':
@@ -107,3 +107,11 @@ class Server(object):
         req = urllib2.Request(self.address, urllib.urlencode(params))
         response = urllib2.urlopen(req)
         return response.read()
+
+    def deleterecord(self, database, priref):
+        params = {'command': 'deleterecord', 'output': 'json',
+                  'database': database, 'priref': priref}
+        req = urllib2.Request(self.address, urllib.urlencode(params))
+        response = urllib2.urlopen(req)
+        return response.read()
+
