@@ -15,7 +15,6 @@ admin.site.register(Vraag, VraagAdmin)
 class AntwoordAdmin(admin.ModelAdmin):
     list_display = ('serievraag', 'obj', 'value', 'user', 'created')
     date_hierarchy = 'created'
-    list_filter = ('user','serievraag__vraag')
 admin.site.register(Antwoord, AntwoordAdmin)
 
 class SerieVraagInline(admin.TabularInline):
