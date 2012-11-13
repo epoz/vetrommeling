@@ -1,8 +1,9 @@
+import os
 # Django settings for AHMTG project.
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-
+PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
