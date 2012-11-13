@@ -5,6 +5,7 @@
 # Feel free to add features if you require items not yet supported.
 # Contact: Etienne posthumus <eposthumus@gmail.com>
 
+import cgi
 import urllib
 import urllib2
 import json
@@ -17,12 +18,12 @@ class Server(object):
     def __init__(self, address):
         self.address = address
         self.data_obj = None
+        self.debug = False
 
     def _do_action(self):        
         uri = self.address+'?'+urllib.urlencode(self.params)
         sys.stderr.write(uri+'\n')
-        data = urllib2.urlopen(uri).read()
-        sys.stderr.write(uri+'\n')
+        data = urllib2.urlopen(uri).read()        
         try:
             obj = json.loads(data)
         except ValueError:
@@ -96,15 +97,28 @@ class Server(object):
     def updaterecord(self, database, data):
         if 'priref' not in data:
             raise Exception('A priref in data is required')
-        params = {'database': database, 'output':'json' }
-        adlibxml = '<adlibXML><recordList><record><priref>%s</priref>' % data['priref']
-        for k,v in data.items():
+        return self.insert_or_update_record('updaterecord', database, data)
+
+    def insertrecord(self, database, data):
+        data['priref'] = '0'
+        return self.insert_or_update_record('insertrecord', database, data)        
+
+    def insert_or_update_record(self, command, database, data):
+        params = {'database': database, 'output': 'json', 'command': command}
+
+        adlibxml = '<adlibXML><recordList><record>'
+        if 'priref' in data:
+            adlibxml += '<priref>%s</priref>' % data['priref']
+        for k, v in data.items():
             if k == 'priref':
                 continue
-            adlibxml += '<%s>%s</%s>' % (k.encode('utf8'),v.encode('utf8'),k.encode('utf8'))
+            adlibxml += '<%s>%s</%s>' % (k.encode('utf8'), v.encode('utf8'), k.encode('utf8'))
         adlibxml += '</record></recordList></adlibXML>'
-        params['data'] = adlibxml
+        params['data'] = cgi.escape(adlibxml)
         req = urllib2.Request(self.address, urllib.urlencode(params))
+        if self.debug:
+            print req
+            return
         response = urllib2.urlopen(req)
         return response.read()
 
@@ -112,6 +126,9 @@ class Server(object):
         params = {'command': 'deleterecord', 'output': 'json',
                   'database': database, 'priref': priref}
         req = urllib2.Request(self.address, urllib.urlencode(params))
+        if self.debug:
+            print req
+            return
         response = urllib2.urlopen(req)
         return response.read()
 
