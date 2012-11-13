@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block container %}
+<div>
+
+<div style="background-color: #ddd; padding: 9px; margin-bottom: 30px">
+<h1>Tag exports</h1>
+{% for e in exports %}
+    <p><a href="/tagexports/?filename={{e}}">{{e}}</a></p>
+{% endfor %}</div>
+
+<h2>{{tag_map.meta.timestamp}}</h2>
+{% for k,v in tag_map.data.items %}
+    <p><a style="font-weight: bold" href="http://am.adlibhosting.com/wwwopacx/wwwopac.ashx?database=tagging&output=json&search=tag%3D{{k|urlencode}}">{{k}}</a>:
+    {% for vv in v %}<a href="http://collectie.amsterdammuseum.nl/dispatcher.aspx?action=search&database=ChoiceCollect&search=priref={{vv}}">{{vv}}</a> &middot; {% endfor %}
+    </p>
+{% endfor %}
+
+</div>
+{% endblock container %}
+    
