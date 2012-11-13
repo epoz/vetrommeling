@@ -26,7 +26,7 @@ class SerieItemInline(admin.TabularInline):
     model = SerieItem
 
 class SerieAdmin(admin.ModelAdmin):
-    inlines = [SerieVraagInline, SerieItemInline]
+    inlines = [SerieVraagInline]
 admin.site.register(Serie, SerieAdmin)
 
 class UserProfileSchoolInline(admin.TabularInline):
@@ -47,3 +47,5 @@ class ExtendedUserAdmin(UserAdmin):
 
 admin.site.unregister(User)
 admin.site.register(User, ExtendedUserAdmin)
+
+admin.site.register(Stopword)
