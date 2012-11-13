@@ -4,13 +4,25 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.shortcuts import render
+from django.conf import settings
 import random, json
 import adlib
 import models
 import util
+import os
 
 def help(request, pagename='about'):
     return render(request, 'help/%s.html'%pagename, {'pagename': pagename})    
+
+def tagexports(request):
+    tpath = os.path.join(settings.PROJECT_ROOT, 'templates', 'help')
+    exports = [x for x in os.listdir(tpath) if x.startswith('tagexport_')]
+    filename = request.GET.get('filename')
+    if filename:
+        tag_map = json.loads(open(os.path.join(tpath, filename)).read())
+    else:
+        tag_map = None
+    return render(request, 'help/tagexport.html', {'exports': exports, 'tag_map': tag_map})
 
 def home(request):
     if request.user.is_anonymous():
@@ -109,6 +121,7 @@ def doseries(request, serie_pk):
     serie = models.Serie.objects.get(pk=serie_pk)
     vraag = random.choice(serie.vragen.all())
     obj = random.choice(serie.items.all()).obj
+    util.update_pic_url(obj)
     antwoorden = request.user.antwoorden.filter(serievraag__serie=serie)
     aantal_deelnemers = models.User.objects.count()
     aantal_antwoorden = models.Antwoord.objects.count()
