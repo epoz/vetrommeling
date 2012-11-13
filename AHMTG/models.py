@@ -111,9 +111,15 @@ class Antwoord(models.Model):
     serievraag = models.ForeignKey('SerieVraag', related_name='antwoorden')
     user = models.ForeignKey(User, related_name='antwoorden')
     obj = models.CharField(max_length=250)
-    value = models.CharField(max_length=250)
+    value = models.CharField(max_length=250, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     exported = models.DateTimeField(null=True, blank=True)
 
     def __unicode__(self):
         return u'%s - %s %s' % (self.user.email, self.serievraag.vraag.txt, self.value)
+
+class Stopword(models.Model):
+    app = models.ForeignKey(App, related_name='stopwords', blank=True, null=True)
+    word = models.CharField(max_length=200)
+    def __unicode__(self):
+        return u'%s %s' % (self.app or u'', self.word)
