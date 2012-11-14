@@ -58,6 +58,8 @@ def tag_export():
     return tag_map
 
 def write_tags_to_template(tag_map):
+    if not tag_map:
+        return {}
     nonce = str(hash(json.dumps(tag_map)))
     output = os.path.join(settings.PROJECT_ROOT, 'templates', 'help', 'tagexport_'+nonce+'.json')
     data = {'data': tag_map, 
