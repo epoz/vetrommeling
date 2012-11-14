@@ -41,7 +41,10 @@ def tag_export():
         c.search(database='tagging', search='tag=%s' % k.encode('utf8'))
         if len(c) < 1:
             c.insertrecord('tagging', {'tag': k})
-        priref = c[0]['priref']
+        if len(c) > 0:
+            priref = c[0]['priref']
+        else:
+            priref = '0'
         # and now for each priref linked to this tag
         for vv in v:
             now = datetime.now()
