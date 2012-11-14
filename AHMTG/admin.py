@@ -13,7 +13,7 @@ class VraagAdmin(admin.ModelAdmin):
 admin.site.register(Vraag, VraagAdmin)
 
 class AntwoordAdmin(admin.ModelAdmin):
-    list_display = ('serievraag', 'obj', 'value', 'user', 'created')
+    list_display = ('user', 'value', 'created', 'exported')
     date_hierarchy = 'created'
 admin.site.register(Antwoord, AntwoordAdmin)
 
