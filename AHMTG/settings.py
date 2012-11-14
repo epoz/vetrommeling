@@ -156,3 +156,9 @@ LOGGING = {
 
 AUTH_PROFILE_MODULE = 'AHMTG.UserProfile'
 LOGIN_URL = '/login/'
+
+import traceback
+try:
+    from settings_local import *
+except:
+    traceback.print_exc()
