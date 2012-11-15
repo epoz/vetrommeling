@@ -40,11 +40,10 @@ def tag_export():
     for k, v in tag_map.items():
         c.search(database='tagging', search='tag=%s' % k.encode('utf8'))
         if len(c) < 1:
-            c.insertrecord('tagging', {'tag': k})
-        if len(c) > 0:
-            priref = c[0]['priref']
+            new_item = c.insertrecord('tagging', {'tag': k})
+            priref = new_item['priref']
         else:
-            priref = '0'
+            priref = c[0]['priref']
         # and now for each priref linked to this tag
         for vv in v:
             now = datetime.now()
