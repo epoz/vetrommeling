@@ -62,8 +62,9 @@ blockquote { background-color:#FFF; padding:20px; border:1px solid #BBB; margin-
 .container ul { margin:0; padding:0 0 0 15px;}
 .container li { margin-bottom:4px;}
 
-header { width:100%; height:35px; clear:both; position:relative; border-bottom: 1px solid #ddd;}
-
+header { width:100%; height:165px; clear:both; position:relative; border-bottom: 1px solid #ddd;}
+#logo { float:left; clear:both; width:130px; height:310px; background: url(../img/logo_amsterdammuseum.png) top left no-repeat; }
+#logo span { display:none;}
 #siteMenuLeft { float:left;}
 #siteMenuRight { float:right;}
 .nav { padding:0; margin:0; list-style:none;}
@@ -80,8 +81,9 @@ form label span { display:block; clear:both;}
 
 #volgende { margin-left:10px;}
 
-footer { width: 100%; background-color: #FFF; margin-top: 0px; height: 120px; padding: 0;  
+footer { width: 100%; background-color: #FFF; margin-top: 0px; height: 80px; padding: 0;  
          text-align: center; font-style: italic; color: #888; border-top: 1px solid #ddd;}
+footer img { margin-top:10px;}		 
 
 .btn-primary, .btn{background-color:#909090; text-decoration:none;  color:#FFFFFF; padding:3px 15px 3px 15px; border-radius: 8px; -moz-border-radius: 8px;  -webkit-border-radius: 8px; border:1px outset #000;text-shadow: 1px 1px 0px #000; font-weight:bold; font-size:1em;}
 .btn-primary:hover, .btn:hover { text-shadow:none;}
