@@ -2,7 +2,14 @@
 {% block container %}
 
     <h1>Culturele Crowdsourcing Game</h1>
-    
+	
+    <h3>Kies een serie om te spelen:</h3>
+    <ul>
+    {% for s in series %}
+    <li><a href="/doseries/{{s.pk}}/">{{s.naam}}</a></li>
+    {% endfor %}
+    </ul>
+	    
     {% if user.get_profile.is_docent %}
     <h2>Docent bij {{user.get_profile.school.name}}</h2>
 
@@ -14,12 +21,5 @@
     {% endfor %}
 
     {% endif %}
-    
-    <h3>Kies een serie om te spelen:</h3>
-    <ul>
-    {% for s in series %}
-    <li><a href="/doseries/{{s.pk}}/">{{s.naam}}</a></li>
-    {% endfor %}
-    </ul>
 
 {% endblock container %}
