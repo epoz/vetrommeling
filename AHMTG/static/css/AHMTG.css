@@ -106,4 +106,4 @@ textarea:focus,input[type="text"]:focus,input[type="password"]:focus,input[type=
 /* styles toegepast voor Amsterdam Museum */
 a, h1, h2, h3, h4, h5, h6{ color:#ED1D24;}
 a:hover {color:#8B0304;}
-.btn-primary, .btn{background-color:#ED1D24; color:#FFFFFF; padding:3px 15px 3px 15px; border-radius: 0px; -moz-border-radius: 0px;  -webkit-border-radius: 0px; border:1px outset #000;text-shadow: 0px;}
+.btn-primary, .btn{background-color:#ED1D24; color:#FFFFFF; padding:3px 15px 3px 15px; border-radius: 0px; -moz-border-radius: 0px;  -webkit-border-radius: 0px; border: none;text-shadow: none;}
