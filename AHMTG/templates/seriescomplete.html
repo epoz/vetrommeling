@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block container %}
+<h1>{{serie.naam}}</h1>
+
+    <div class="blokLeft" id="viewer">
+        <h1>Series Compleet!</h1>
+    </div>
+    <div class="blokRight">
+            <h3>Scoreboard</h3>
+            <p><em>Je heb {{antwoorden.count}} van {{serie.items.count}} in deze reeks gedaan. Ga door!</em></p>
+            <p>Aantal deelnemers: {{aantal_deelnemers}}</p>
+            <p>Aantal antwoorden: {{aantal_antwoorden}}</p>
+            <p>Gemiddeld aantale taken gedaan: {{gem_antwoorden}}</p>
+
+    </div>
+
+
+{% endblock container %}

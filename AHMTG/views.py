@@ -118,14 +118,26 @@ def adlibpreview(request):
 
 @login_required
 def doseries(request, serie_pk):
-    serie = models.Serie.objects.get(pk=serie_pk)
-    vraag = random.choice(serie.vragen.all())
-    obj = random.choice(serie.items.all()).obj
-    util.update_pic_url(obj)
-    antwoorden = request.user.antwoorden.filter(serievraag__serie=serie)
     aantal_deelnemers = models.User.objects.count()
     aantal_antwoorden = models.Antwoord.objects.count()
     gem_antwoorden = aantal_antwoorden / aantal_deelnemers
+
+    serie = models.Serie.objects.get(pk=serie_pk)
+    vraag = random.choice(serie.vragen.all())
+    # The items that have already been answered
+    answered_obj = [x['obj'] for x in request.user.antwoorden.filter(serievraag__serie=serie).values('obj')]
+    avail_items = serie.items.exclude(objid__in=answered_obj)
+
+    if avail_items.count() < 1:
+        return direct_to_template(request, 'seriescomplete.html', 
+                                  {'serie': serie,
+                                  'aantal_deelnemers': aantal_deelnemers,
+                                  'aantal_antwoorden': aantal_antwoorden,
+                                  'gem_antwoorden': gem_antwoorden,    
+                                  })
+    obj = random.choice(avail_items).obj
+    util.update_pic_url(obj)
+    antwoorden = request.user.antwoorden.filter(serievraag__serie=serie)
 
     return direct_to_template(request, 'doseries.html',
                               {'serie': serie,
