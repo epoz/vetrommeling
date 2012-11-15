@@ -119,8 +119,9 @@ class Server(object):
         if self.debug:
             print req
             return
-        response = urllib2.urlopen(req)
-        return response.read()
+        response = urllib2.urlopen(req).read()
+        data = json.loads(response)
+        return data.get('adlibJSON', {}).get('recordList').get('record', [None])[0]
 
     def deleterecord(self, database, priref):
         params = {'command': 'deleterecord', 'output': 'json',

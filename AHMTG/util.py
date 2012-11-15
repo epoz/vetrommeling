@@ -43,7 +43,7 @@ def tag_export():
             new_item = c.insertrecord('tagging', {'tag': k})
             priref = new_item['priref']
         else:
-            priref = c[0]['priref']
+            priref = c[0]['priref'][0]
         # and now for each priref linked to this tag
         for vv in v:
             now = datetime.now()
