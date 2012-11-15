@@ -22,7 +22,8 @@ class Server(object):
 
     def _do_action(self):        
         uri = self.address+'?'+urllib.urlencode(self.params)
-        sys.stderr.write(uri+'\n')
+        if self.debug:
+            sys.stderr.write(uri+'\n')
         data = urllib2.urlopen(uri).read()        
         try:
             obj = json.loads(data)
