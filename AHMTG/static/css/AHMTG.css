@@ -78,7 +78,7 @@ header { width:100%; height:165px; clear:both; position:relative; border-bottom:
  
 form label { display:block; clear:both;}
 form label span { display:block; clear:both;}
-form#login-form div { margin:5px 0 5px 0;}
+form#login-form div { margin:10px 0 10px 0;}
 
 #volgende { margin-left:10px;}
 
