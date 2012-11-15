@@ -103,5 +103,5 @@ textarea:focus,input[type="text"]:focus,input[type="password"]:focus,input[type=
 
 
 /* styles toegepast voor Amsterdam Museum */
-a, a:hover, h1, h2, h3, h4, h5, h6{ color:#ED1D24;}
-
+a, h1, h2, h3, h4, h5, h6{ color:#ED1D24;}
+a:hover {color:#8B0304;}
