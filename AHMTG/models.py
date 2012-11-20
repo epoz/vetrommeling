@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 import json
+import re
 
 class EmailOrUsernameModelBackend(object):
     supports_object_permissions = False
@@ -114,6 +115,24 @@ class Antwoord(models.Model):
     value = models.CharField(max_length=250, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     exported = models.DateTimeField(null=True, blank=True)
+
+    def tags(self):
+        stopwords = [w.word for w in Stopword.objects.all()]
+        return [aa for aa in re.split(',| ', self.value) if aa and not (aa in stopwords)]
+
+    def link_to_adlib_tagdb(self):
+        if not self.value:
+            return u''
+        tagsearch = 'http://am.adlibhosting.com/wwwopacx/wwwopac.ashx?database=tagging&search=tag%3D'
+        objsearch = 'http://am.adlibhosting.com/wwwopacx/wwwopac.ashx?database=tagging&search=linked.priref%3D'+self.obj
+        tagurls = []
+        for t in self.tags():
+            tmp = '<a href="%s">%s</a>' % (tagsearch+t, t)
+            tagurls.append(tmp)
+        tagurls.append('&middot;')
+        tagurls.append('<a href="%s">%s</a>' % (objsearch, self.obj))
+        return ' '.join(tagurls)
+    link_to_adlib_tagdb.allow_tags = True
 
     def __unicode__(self):
         return u'%s - %s %s' % (self.user.email, self.serievraag.vraag.txt, self.value)

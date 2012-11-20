@@ -1,7 +1,3 @@
-import re
-import os
-import json
-import time
 import traceback
 from datetime import datetime
 from django.utils.timezone import utc
@@ -27,12 +23,9 @@ def tag_export():
     # for each word, make a list of object ids (priref for Adlib)
     tag_map = {}
     # Collect the stopwords
-    stopwords = [w.word for w in models.Stopword.objects.all()]
     for a in models.Antwoord.objects.filter(exported=None):
         if a.value:
-            for aa in re.split(',| ', a.value):
-                if not aa or (aa in stopwords):
-                    continue
+            for aa in a.tags():
                 tag_map.setdefault(aa, []).append(a)
 
     c = adlib.Server('http://am.adlibhosting.com/wwwopacx/wwwopac.ashx')
