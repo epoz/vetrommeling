@@ -2,7 +2,9 @@ import re
 import os
 import json
 import time
+import traceback
 from datetime import datetime
+from django.utils.timezone import utc
 import models
 import adlib
 from django.conf import settings
@@ -31,9 +33,7 @@ def tag_export():
             for aa in re.split(',| ', a.value):
                 if not aa or (aa in stopwords):
                     continue
-                tag_map.setdefault(aa, []).append(a.obj)
-        a.exported = datetime.now()
-        a.save()
+                tag_map.setdefault(aa, []).append(a)
 
     c = adlib.Server('http://am.adlibhosting.com/wwwopacx/wwwopac.ashx')
     c.debug = settings.DEBUG
@@ -46,22 +46,18 @@ def tag_export():
             priref = c[0]['priref'][0]
         # and now for each priref linked to this tag
         for vv in v:
-            now = datetime.now()
-            c.updaterecord('tagging', 
-                           {'priref': priref,
-                            'linked.priref': vv,
-                            'linked.date': '{:%Y-%m-%d}'.format(now),
-                            'linked.time': '{:%H:%M:%S}'.format(now),
-                           })
+            try:
+                now = datetime.utcnow().replace(tzinfo=utc)
+                c.updaterecord('tagging', 
+                               {'priref': priref,
+                                'linked.priref': vv.obj,
+                                'linked.date': '{:%Y-%m-%d}'.format(now),
+                                'linked.time': '{:%H:%M:%S}'.format(now),
+                               })
+            except:
+                traceback.print_exc()
+            finally:
+                vv.exported = now
+                vv.save()
 
-    return tag_map
-
-def write_tags_to_template(tag_map):
-    if not tag_map:
-        return {}
-    nonce = str(hash(json.dumps(tag_map)))
-    output = os.path.join(settings.PROJECT_ROOT, 'templates', 'help', 'tagexport_'+nonce+'.json')
-    data = {'data': tag_map, 
-            'meta': {'timestamp': time.ctime()}}
-    open(output, 'w').write(json.dumps(data))
     return tag_map

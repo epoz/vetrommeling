@@ -118,18 +118,18 @@ class Server(object):
         params['data'] = cgi.escape(adlibxml)
         req = urllib2.Request(self.address, urllib.urlencode(params))
         if self.debug:
-            print req
-            return
+            print self.address, urllib.urlencode(params)
+            return data
         response = urllib2.urlopen(req).read()
         data = json.loads(response)
-        return data.get('adlibJSON', {}).get('recordList').get('record', [None])[0]
+        return data.get('adlibJSON', {}).get('recordList', {}).get('record', [None])[0]
 
     def deleterecord(self, database, priref):
         params = {'command': 'deleterecord', 'output': 'json',
                   'database': database, 'priref': priref}
         req = urllib2.Request(self.address, urllib.urlencode(params))
         if self.debug:
-            print req
+            print self.address, urllib.urlencode(params)
             return
         response = urllib2.urlopen(req)
         return response.read()

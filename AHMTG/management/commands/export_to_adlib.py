@@ -8,5 +8,5 @@ class Command(BaseCommand):
     
     def handle(self, *args, **options):
         tag_map = util.tag_export()
-        util.write_tags_to_template(tag_map)
-        print 'Wrote %s tags' % len(tag_map)
+        if tag_map:
+            print 'Wrote %s tags' % len(tag_map)

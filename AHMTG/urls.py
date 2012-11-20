@@ -6,7 +6,6 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'AHMTG.views.home', name='home'),
-    url(r'^tagexports/$', 'AHMTG.views.tagexports'),
     url(r'^help/(.*)', 'AHMTG.views.help', name='help'),
     url(r'^adlibpreview/$', 'AHMTG.views.adlibpreview', name='adlibpreview'),
     url(r'^makeseries/$', 'AHMTG.views.makeseries', name='makeseries'),
