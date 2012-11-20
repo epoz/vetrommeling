@@ -9,7 +9,7 @@
     <li><a href="/doseries/{{s.pk}}/">{{s.naam}}</a></li>
     {% endfor %}
     </ul>
-	    
+	<br /><br />
     {% if user.get_profile.is_docent %}
     <h2>Docent bij {{user.get_profile.school.name}}</h2>
 
