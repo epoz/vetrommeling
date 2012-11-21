@@ -12,10 +12,17 @@ class VraagAdmin(admin.ModelAdmin):
     inlines = [KeuzeInline]
 admin.site.register(Vraag, VraagAdmin)
 
+def reset_export_timestamp(modeladmin, request, queryset):
+    for x in queryset:
+        x.exported = None
+        x.save()
+reset_export_timestamp.short_description = u"Reset Export"
+
 class AntwoordAdmin(admin.ModelAdmin):
     list_display = ('user', 'link_to_adlib_tagdb', 'created', 'exported')
     date_hierarchy = 'created'
     search_fields = ('value', 'obj')
+    actions = [reset_export_timestamp]
 admin.site.register(Antwoord, AntwoordAdmin)
 
 class SerieVraagInline(admin.TabularInline):
