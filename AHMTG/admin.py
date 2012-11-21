@@ -15,6 +15,7 @@ admin.site.register(Vraag, VraagAdmin)
 class AntwoordAdmin(admin.ModelAdmin):
     list_display = ('user', 'link_to_adlib_tagdb', 'created', 'exported')
     date_hierarchy = 'created'
+    search_fields = ('value', 'obj')
 admin.site.register(Antwoord, AntwoordAdmin)
 
 class SerieVraagInline(admin.TabularInline):
