@@ -19,7 +19,7 @@ def reset_export_timestamp(modeladmin, request, queryset):
 reset_export_timestamp.short_description = u"Reset Export"
 
 class AntwoordAdmin(admin.ModelAdmin):
-    list_display = ('user', 'link_to_adlib_tagdb', 'created', 'exported')
+    list_display = ('user', 'link_to_adlib_tagdb', 'link_to_obj', 'created', 'exported')
     date_hierarchy = 'created'
     search_fields = ('value', 'obj')
     actions = [reset_export_timestamp]

@@ -120,6 +120,13 @@ class Antwoord(models.Model):
         stopwords = [w.word for w in Stopword.objects.all()]
         return [aa for aa in re.split(',| ', self.value) if aa and not (aa in stopwords)]
 
+    def link_to_obj(self):
+        if not self.obj:
+            return u''
+        objurl = 'http://collectie.amsterdammuseum.nl/dispatcher.aspx?action=search&database=ChoiceCollect&search=priref='
+        return '<a href="%s">%s</a>' % (objurl+self.obj, self.obj)
+    link_to_obj.allow_tags = True
+
     def link_to_adlib_tagdb(self):
         if not self.value:
             return u''
