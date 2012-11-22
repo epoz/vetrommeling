@@ -43,6 +43,7 @@ def tag_export():
                 now = datetime.utcnow().replace(tzinfo=utc)
                 c.updaterecord('tagging', 
                                {'priref': priref,
+                                'linked.database': 'ChoiceCollect',
                                 'linked.priref': vv.obj,
                                 'linked.date': '{:%Y-%m-%d}'.format(now),
                                 'linked.time': '{:%H:%M:%S}'.format(now),
